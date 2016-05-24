@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,代码优化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Adu's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="python代码优化小技巧一个良好的算法能够对性能起到关键作用，因此性能改进的首要点是对算法的改进。在算法的时间复杂度排序上依次是：
+
+ O(1) -&amp;gt; O(lg n) -&amp;gt; O(n lg n) -&amp;gt; O(n^2) -&amp;gt; O(n^3) -&amp;gt; O(n^k) -&amp;gt; O(k^n) -&amp;gt; O(n!)
+
+因此如果能够在时间复杂度上对算法进行一定的改进，对性能的提高不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python代码优化小技巧">
+<meta property="og:url" content="http://adu.404nf.cn/2016/03/29/python代码优化小技巧/index.html">
+<meta property="og:site_name" content="Adu's blog">
+<meta property="og:description" content="python代码优化小技巧一个良好的算法能够对性能起到关键作用，因此性能改进的首要点是对算法的改进。在算法的时间复杂度排序上依次是：
+
+ O(1) -&amp;gt; O(lg n) -&amp;gt; O(n lg n) -&amp;gt; O(n^2) -&amp;gt; O(n^3) -&amp;gt; O(n^k) -&amp;gt; O(k^n) -&amp;gt; O(n!)
+
+因此如果能够在时间复杂度上对算法进行一定的改进，对性能的提高不">
+<meta property="og:updated_time" content="2016-03-31T14:37:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python代码优化小技巧">
+<meta name="twitter:description" content="python代码优化小技巧一个良好的算法能够对性能起到关键作用，因此性能改进的首要点是对算法的改进。在算法的时间复杂度排序上依次是：
+
+ O(1) -&amp;gt; O(lg n) -&amp;gt; O(n lg n) -&amp;gt; O(n^2) -&amp;gt; O(n^3) -&amp;gt; O(n^k) -&amp;gt; O(k^n) -&amp;gt; O(n!)
+
+因此如果能够在时间复杂度上对算法进行一定的改进，对性能的提高不">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265234160936289000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> python代码优化小技巧 | Adu's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b72da5a0d7b5ced639a01a28390e0e64";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Adu's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">life is beautiful</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python代码优化小技巧
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-29T20:26:33+08:00" content="2016-03-29">
+              2016-03-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">code</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/29/python代码优化小技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/29/python代码优化小技巧/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python代码优化小技巧"><a href="#python代码优化小技巧" class="headerlink" title="python代码优化小技巧"></a>python代码优化小技巧</h1><p>一个良好的算法能够对性能起到关键作用，因此性能改进的首要点是对算法的改进。在算法的时间复杂度排序上依次是：</p>
+<blockquote>
+<p> O(1) -&gt; O(lg n) -&gt; O(n lg n) -&gt; O(n^2) -&gt; O(n^3) -&gt; O(n^k) -&gt; O(k^n) -&gt; O(n!)</p>
+</blockquote>
+<p>因此如果能够在时间复杂度上对算法进行一定的改进，对性能的提高不言而喻。但对具体算法的改进不属于本文讨论的范围，读者可以自行参考这方面资料。下面的内容将集中讨论数据结构的选择。<br><a id="more"></a></p>
+<h2 id="字典-dictionary-与列表-list"><a href="#字典-dictionary-与列表-list" class="headerlink" title="字典 (dictionary) 与列表 (list)"></a>字典 (dictionary) 与列表 (list)</h2><p>Python 字典中使用了 hash table，因此查找操作的复杂度为 O(1)，而 list 实际是个数组，在 list 中，查找需要遍历整个 list，其复杂度为 O(n)，因此对成员的查找访问等操作字典要比 list 更快。</p>
+<p>清单 1. 代码 dict.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line"> t = time() </span><br><span class="line"> list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'is'</span>,<span class="string">'python'</span>,<span class="string">'jason'</span>,<span class="string">'hello'</span>,<span class="string">'hill'</span>,<span class="string">'with'</span>,<span class="string">'phone'</span>,<span class="string">'test'</span>, </span><br><span class="line"><span class="string">'dfdf'</span>,<span class="string">'apple'</span>,<span class="string">'pddf'</span>,<span class="string">'ind'</span>,<span class="string">'basic'</span>,<span class="string">'none'</span>,<span class="string">'baecr'</span>,<span class="string">'var'</span>,<span class="string">'bana'</span>,<span class="string">'dd'</span>,<span class="string">'wrd'</span>] </span><br><span class="line"> <span class="comment">#list = dict.fromkeys(list,True) </span></span><br><span class="line"> <span class="keyword">print</span> list</span><br><span class="line"> filter = [] </span><br><span class="line"> <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">1000000</span>): </span><br><span class="line">     <span class="keyword">for</span> find <span class="keyword">in</span> [<span class="string">'is'</span>,<span class="string">'hat'</span>,<span class="string">'new'</span>,<span class="string">'list'</span>,<span class="string">'old'</span>,<span class="string">'.'</span>]: </span><br><span class="line">         <span class="keyword">if</span> find <span class="keyword">not</span> <span class="keyword">in</span> list: </span><br><span class="line">             filter.append(find) </span><br><span class="line"> print(<span class="string">"total run time:"</span>)</span><br><span class="line"> print(time()-t)</span><br></pre></td></tr></table></figure>
+<p>上述代码运行大概需要 16.09seconds。如果去掉行 #list = dict.fromkeys(list,True) 的注释，将 list 转换为字典之后再运行，时间大约为 8.375 seconds，效率大概提高了一半。因此在需要多数据成员进行频繁的查找或者访问的时候，使用 dict 而不是 list 是一个较好的选择。</p>
+<h2 id="集合-set-与列表-list"><a href="#集合-set-与列表-list" class="headerlink" title="集合 (set) 与列表 (list)"></a>集合 (set) 与列表 (list)</h2><p>set 的 union， intersection，difference 操作要比 list 的迭代要快。因此如果涉及到求 list 交集，并集或者差的问题可以转换为 set 来操作。</p>
+<p>清单 2. 求 list 的交集：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line">t = time() </span><br><span class="line">lista=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">13</span>,<span class="number">34</span>,<span class="number">53</span>,<span class="number">42</span>,<span class="number">44</span>] </span><br><span class="line">listb=[<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">23</span>] </span><br><span class="line">intersection=[] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">1000000</span>): </span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> lista: </span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> listb: </span><br><span class="line">            <span class="keyword">if</span> a == b: </span><br><span class="line">                intersection.append(a) </span><br><span class="line">print(<span class="string">"total run time:"</span>)</span><br><span class="line"><span class="keyword">print</span> (time()-t)</span><br></pre></td></tr></table></figure></p>
+<p>上述程序的运行时间大概为：</p>
+<pre><code>total run time: 
+38.4070000648
+</code></pre><p>清单 3. 使用 set 求交集<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line">t = time() </span><br><span class="line">lista=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">13</span>,<span class="number">34</span>,<span class="number">53</span>,<span class="number">42</span>,<span class="number">44</span>] </span><br><span class="line">listb=[<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">23</span>] </span><br><span class="line">intersection=[] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">1000000</span>): </span><br><span class="line">    list(set(lista)&amp;set(listb)) </span><br><span class="line">print(<span class="string">"total run time:"</span>)</span><br><span class="line">print(time()-t)</span><br></pre></td></tr></table></figure></p>
+<p>改为 set 后程序的运行时间缩减为 8.75，提高了 4 倍多，运行时间大大缩短。读者可以自行使用表 1 其他的操作进行测试。<br>表 1. set 常见用法<br>语法    操作    说明</p>
+<pre><code>set(list1) | set(list2)    union    包含 list1 和 list2 所有数据的新集合
+set(list1) &amp; set(list2)    intersection    包含 list1 和 list2 中共同元素的新集合
+set(list1) - set(list2)    difference    在 list1 中出现但不在 list2 中出现的元素的集合
+</code></pre><p>清单 4. 利用 Lazy if-evaluation 的特性<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line">t = time() </span><br><span class="line">abbreviations = [<span class="string">'cf.'</span>, <span class="string">'e.g.'</span>, <span class="string">'ex.'</span>, <span class="string">'etc.'</span>, <span class="string">'fig.'</span>, <span class="string">'i.e.'</span>, <span class="string">'Mr.'</span>, <span class="string">'vs.'</span>] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">1000000</span>): </span><br><span class="line">    <span class="keyword">for</span> w <span class="keyword">in</span> (<span class="string">'Mr.'</span>, <span class="string">'Hat'</span>, <span class="string">'is'</span>, <span class="string">'chasing'</span>, <span class="string">'the'</span>, <span class="string">'black'</span>, <span class="string">'cat'</span>, <span class="string">'.'</span>): </span><br><span class="line">        <span class="keyword">if</span> w <span class="keyword">in</span> abbreviations: </span><br><span class="line">        <span class="comment">#if w[-1] == '.' and w in abbreviations: </span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">print(<span class="string">"total run time:"</span>)</span><br><span class="line">print(time()-t)</span><br></pre></td></tr></table></figure></p>
+<p>在未进行优化之前程序的运行时间大概为 8.84，如果使用注释行代替第一个 if，运行的时间大概为 6.17。</p>
+<h2 id="字符串的优化"><a href="#字符串的优化" class="headerlink" title="字符串的优化"></a>字符串的优化</h2><p>python 中的字符串对象是不可改变的，因此对任何字符串的操作如拼接，修改等都将产生一个新的字符串对象，而不是基于原字符串，因此这种持续的 copy 会在一定程度上影响 python 的性能。对字符串的优化也是改善性能的一个重要的方面，特别是在处理文本较多的情况下。字符串的优化主要集中在以下几个方面：</p>
+<p>在字符串连接的使用尽量使用 join() 而不是 +：在代码清单 7 中使用 + 进行字符串连接大概需要 0.125 s，而使用 join 缩短为 0.016s。因此在字符的操作上 join 比 + 要快，因此要尽量使用 join 而不是 +。</p>
+<p>清单 5. 使用 join 而不是 + 连接字符串<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time </span><br><span class="line"></span><br><span class="line">t = time() </span><br><span class="line">s = <span class="string">""</span></span><br><span class="line">list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'b'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>,<span class="string">'g'</span>,<span class="string">'h'</span>,<span class="string">'i'</span>,<span class="string">'j'</span>,<span class="string">'k'</span>,<span class="string">'l'</span>,<span class="string">'m'</span>,<span class="string">'n'</span>] </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">10000</span>): </span><br><span class="line">    <span class="keyword">for</span> substr <span class="keyword">in</span> list: </span><br><span class="line">        s+= substr     </span><br><span class="line">print(<span class="string">"total run time:"</span>)</span><br><span class="line">print(time()-t)</span><br></pre></td></tr></table></figure></p>
+<p>同时要避免：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> list: </span><br><span class="line">   s += func(x)</span><br></pre></td></tr></table></figure></p>
+<p>而是要使用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">slist = [func(elt) <span class="keyword">for</span> elt <span class="keyword">in</span> somelist] </span><br><span class="line">s = <span class="string">""</span>.join(slist)</span><br></pre></td></tr></table></figure></p>
+<p>当对字符串可以使用正则表达式或者内置函数来处理的时候，选择内置函数。如 str.isalpha()，str.isdigit()，str.startswith((‘x’, ‘yz’))，str.endswith((‘x’, ‘yz’))<br>对字符进行格式化比直接串联读取要快，因此要使用<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out = <span class="string">"&lt;html&gt;%s%s%s%s&lt;/html&gt;"</span> % (head, prologue, query, tail)</span><br></pre></td></tr></table></figure></p>
+<p>而避免<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out = <span class="string">"&lt;html&gt;"</span> + head + prologue + query + tail + <span class="string">"&lt;/html&gt;"</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="其他优化技巧"><a href="#其他优化技巧" class="headerlink" title="其他优化技巧"></a>其他优化技巧</h2><p>如果需要交换两个变量的值使用 a,b=b,a 而不是借助中间变量 t=a;a=b;b=t；<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> timeit <span class="keyword">import</span> Timer </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Timer(<span class="string">"t=a;a=b;b=t"</span>,<span class="string">"a=1;b=2"</span>).timeit() </span><br><span class="line"><span class="number">0.25154118749729365</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Timer(<span class="string">"a,b=b,a"</span>,<span class="string">"a=1;b=2"</span>).timeit() </span><br><span class="line"><span class="number">0.17156677734181258</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<ul>
+<li>使用局部变量，避免”global” 关键字。python 访问局部变量会比全局变量要快得多，因 此可以利用这一特性提升性能。</li>
+<li>if done is not None 比语句 if done != None 更快，读者可以自行验证；</li>
+<li>在耗时较多的循环中，可以把函数的调用改为内联的方式；</li>
+<li>使用级联比较 “x &lt; y &lt; z” 而不是 “x &lt; y and y &lt; z”；</li>
+<li>while 1 要比 while True 更快（当然后者的可读性更好）；</li>
+<li>build in 函数通常较快，add(a,b) 要优于 a+b。</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/代码优化/" rel="tag">#代码优化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/24/程序员工具（mac）/" rel="next" title="程序员工具（mac）">
+                <i class="fa fa-chevron-left"></i> 程序员工具（mac）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/29/推荐几个学习python还不错的网站/" rel="prev" title="推荐几个学习python还不错的网站">
+                推荐几个学习python还不错的网站 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/29/python代码优化小技巧/"
+     data-title="python代码优化小技巧"
+     data-content=""
+     data-url="http://adu.404nf.cn/2016/03/29/python代码优化小技巧/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/29/python代码优化小技巧/"
+           data-title="python代码优化小技巧" data-url="http://adu.404nf.cn/2016/03/29/python代码优化小技巧/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="images/default_avatar.jpg"
+               alt="Luke Du" />
+          <p class="site-author-name" itemprop="name">Luke Du</p>
+          <p class="site-description motion-element" itemprop="description">life is beautiful</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ADU-21" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/6069208/luke-du" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> stackoverflow
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/duuyidong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/zh-cn/" target="_blank">Hexo</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python代码优化小技巧"><span class="nav-number">1.</span> <span class="nav-text">python代码优化小技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字典-dictionary-与列表-list"><span class="nav-number">1.1.</span> <span class="nav-text">字典 (dictionary) 与列表 (list)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合-set-与列表-list"><span class="nav-number">1.2.</span> <span class="nav-text">集合 (set) 与列表 (list)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串的优化"><span class="nav-number">1.3.</span> <span class="nav-text">字符串的优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他优化技巧"><span class="nav-number">1.4.</span> <span class="nav-text">其他优化技巧</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luke Du</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"duuyidong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
