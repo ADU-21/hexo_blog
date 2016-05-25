@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://adu.404nf.cn/"/>
-  <updated>2016-05-20T01:54:23.000Z</updated>
+  <updated>2016-05-24T16:22:17.000Z</updated>
   <id>http://adu.404nf.cn/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ThoughtWorks第一周学习总结</title>
+    <link href="http://adu.404nf.cn/2016/05/24/ThoughtWorks%E7%AC%AC%E4%B8%80%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    <id>http://adu.404nf.cn/2016/05/24/ThoughtWorks第一周学习总结/</id>
+    <published>2016-05-24T13:44:57.000Z</published>
+    <updated>2016-05-24T16:22:17.000Z</updated>
+    
+    <content type="html">&lt;h1 id=&quot;关于一周来学习情况总结&quot;&gt;&lt;a href=&quot;#关于一周来学习情况总结&quot; class=&quot;headerlink&quot; title=&quot;关于一周来学习情况总结&quot;&gt;&lt;/a&gt;关于一周来学习情况总结&lt;/h1&gt;&lt;p&gt;不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;下面就几个关键词进行一个小结：&lt;/p&gt;
+&lt;h2 id=&quot;我所除的环境&quot;&gt;&lt;a href=&quot;#我所除的环境&quot; class=&quot;headerlink&quot; title=&quot;我所除的环境&quot;&gt;&lt;/a&gt;我所除的环境&lt;/h2&gt;&lt;h3 id=&quot;ThouhgtWorks显而易见的工作习惯&quot;&gt;&lt;a href=&quot;#ThouhgtWorks显而易见的工作习惯&quot; class=&quot;headerlink&quot; title=&quot;ThouhgtWorks显而易见的工作习惯&quot;&gt;&lt;/a&gt;ThouhgtWorks显而易见的工作习惯&lt;/h3&gt;&lt;p&gt;  1.Email 轰炸&lt;br&gt;  2.Stand metting&lt;br&gt;      就像Align Development里面提到的一样，Stand up, Aline Comstomer 在TW被很好地执行，每日站会是必不可少的&lt;br&gt;  3.频繁的沟通&lt;br&gt;      之前的工作经验告诉我，你只需要写得一手好代码就可以在公司站稳脚跟，但是这点认知在TW被彻底推翻，与代码同样重要的是你的沟通能力，在实际开发过程中，沟通消耗的资源甚至会大于写代码的消耗。&lt;br&gt;  4.Pair-Programming&lt;br&gt;      这也是Align Deployment的重要一环，在TW几乎每一件事都是pair的，这中工作方式可以有效地解决掉“个人英雄”的问题，一段代码出了问题，至少有两个人可以来改这段代码。同时加强了程序员之间的交流，也有利于代码规范的实施。&lt;br&gt;  5.代码洁癖&lt;br&gt;      由于每一段代码都会有人review,这使很多TWer养成了代码洁癖，代码不但要实现功能，还要写得好看，这一点我个人认为也是极好的。&lt;br&gt;  6.频繁的workshop和session&lt;br&gt;  7.无处不在的敏捷&lt;br&gt;    在TW，敏捷已经超越一种开发方式而成为一种文化存在，步步为营，小步前进，似乎是每一个工程师低调而又自信的工作方式。这很好，值得学习：）&lt;/p&gt;
+&lt;h2 id=&quot;我面临的问题&quot;&gt;&lt;a href=&quot;#我面临的问题&quot; class=&quot;headerlink&quot; title=&quot;我面临的问题&quot;&gt;&lt;/a&gt;我面临的问题&lt;/h2&gt;&lt;p&gt;工作方式上的问题是很容易适应的，TW有宽松的工作环境和乐于助人的同事。让我吃惊的是我接触到的每一个同事都是健谈而友好的，其中不乏很多大神，所以我一点都不担心自己成长。目前只需要找到自己的短板，针对性的进行一些加强性训练：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.英文能力
+    从进公司到现在，已经从几乎听不懂同事们在说什么到可以看英文文档了，但是英文交流还存在严重的问题，主要表现在无法用英语表达自己所想的内容，另外英文阅读和听力速度还有些跟不上
+2.DevOps专业能力
+    目前我接触到的DevOps能力主要落实到几个工具的使用上：Jenkins,AWS,ansible,另外还需要掌握vagrant,git,shell,yaml，Linux命令（Vi编辑器命令）对工具来讲，整体不难，拿下英文文档，实际需要的只是操作，后面几个更倾向于需要具备的基本素质才是我目前最需要达到的目标。
+3.习惯的建立
+    习惯主要分为工作习惯，学习习惯，和生活习惯，这几点在过去的一周几乎是混乱的，这几个习惯应该有一定的准则，概括来说，工作习惯应该是高效可靠，随时可以再session和当前的work中切换自己的状态，那么设计到的内容主要是calendar的管理和mind.txt的优化，我还没有上手公司正式项目，所以目前工作效率优化仅仅停留在自己的事情备忘和计划这个层面。生活习惯，目前来讲主要是健身和游泳，羽毛球视club活动参加，生活应该规律，保证健康的身体和工作时间有一个清醒的大脑。学习习惯是所有习惯中最重要的，主要是根据学习时间，blog时间和阅读时间是每天不可少的内容，希望这些习惯可以再TW贯彻下去.
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;我的应对&quot;&gt;&lt;a href=&quot;#我的应对&quot; class=&quot;headerlink&quot; title=&quot;我的应对&quot;&gt;&lt;/a&gt;我的应对&lt;/h2&gt;&lt;pre&gt;&lt;code&gt;1.关于英语问题，目前的解决方式是阅读MartinFlower的博客，以及每天用英语进行工作总结，尽可能熟悉英文语境以求更好表达自己想表达的东西。
+2.DevOps专业能力
+    workshop基本只适用于还没有建立起自己学习习惯的人和对一个东西建立初步认识，session也不能对技术提高起到决定性的帮助，频繁的沟通带来的缺点是时间的碎片化，我需要随时跟进自己的一个进程进展到什么程度，有效挂起和有效恢复，才能保证工作和学习同步有效地进行。
+    具体来说专业能力的提高除了被动在工作中使用需要用到的技术，跟以前一样，还是要在工作之余对在工作中遇到的问题进行挖掘，弄清楚背后的原理，才能应对同样的问题以及问题的变种。
+3.习惯的建立
+    工作上和生活上不用花太大心思，生活上只要保证每天早晚各半个小时的锻炼整个人的精气神就会大不一样。周末游泳，这个不用我说自然会有的。    
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&quot;我的决定&quot;&gt;&lt;a href=&quot;#我的决定&quot; class=&quot;headerlink&quot; title=&quot;我的决定&quot;&gt;&lt;/a&gt;我的决定&lt;/h2&gt;&lt;p&gt;基于以上现状以及分析，我的个人时间计划表初步安排如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;7：00 起床
+~7：30洗漱，锻炼
+~8：00阅读英语，内容为随机选取技术博客活着计划任务一篇
+9：00~12：00工作
+12：00~13：00阅读一小时
+13：00~13：30可以适当午休
+14：00~19:00工作，汇报一天的工作
+20：00成功降落
+晚上：整理白天产生的mind.txt，选取一个技术点blog
+    英文能力训练二十分钟，阅读一小时，锻炼半小时
+23:00睡觉    
+&lt;/code&gt;&lt;/pre&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;关于一周来学习情况总结&quot;&gt;&lt;a href=&quot;#关于一周来学习情况总结&quot; class=&quot;headerlink&quot; title=&quot;关于一周来学习情况总结&quot;&gt;&lt;/a&gt;关于一周来学习情况总结&lt;/h1&gt;&lt;p&gt;不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="ThoughtWorker" scheme="http://adu.404nf.cn/categories/ThoughtWorker/"/>
+    
+    
+      <category term="敏捷" scheme="http://adu.404nf.cn/tags/%E6%95%8F%E6%8D%B7/"/>
+    
+      <category term="ThoughtWorks" scheme="http://adu.404nf.cn/tags/ThoughtWorks/"/>
+    
+  </entry>
   
   <entry>
     <title>CI/CD</title>
@@ -438,9 +490,9 @@
       <category term="code" scheme="http://adu.404nf.cn/categories/code/"/>
     
     
-      <category term="编程思想" scheme="http://adu.404nf.cn/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
-    
       <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
+    
+      <category term="编程思想" scheme="http://adu.404nf.cn/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/"/>
     
   </entry>
   
@@ -513,9 +565,9 @@
       <category term="crawler" scheme="http://adu.404nf.cn/categories/crawler/"/>
     
     
-      <category term="爬虫" scheme="http://adu.404nf.cn/tags/%E7%88%AC%E8%99%AB/"/>
-    
       <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
+    
+      <category term="爬虫" scheme="http://adu.404nf.cn/tags/%E7%88%AC%E8%99%AB/"/>
     
   </entry>
   
@@ -547,9 +599,9 @@
       <category term="code" scheme="http://adu.404nf.cn/categories/code/"/>
     
     
-      <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
-    
       <category term="代码优化" scheme="http://adu.404nf.cn/tags/%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
     
   </entry>
   
@@ -743,9 +795,9 @@ set(list1) - set(list2)    difference    在 list1 中出现但不在 list2 中�
       <category term="code" scheme="http://adu.404nf.cn/categories/code/"/>
     
     
-      <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
-    
       <category term="代码优化" scheme="http://adu.404nf.cn/tags/%E4%BB%A3%E7%A0%81%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="python" scheme="http://adu.404nf.cn/tags/python/"/>
     
   </entry>
   
