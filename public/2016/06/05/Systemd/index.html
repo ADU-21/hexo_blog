@@ -1,0 +1,903 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Linux,Systemd," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Adu's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Systemd 是 Linux 系统工具，用来启动守护进程，已成为大多数发行版的标准配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Systemd">
+<meta property="og:url" content="http://adu.404nf.cn/2016/06/05/Systemd/index.html">
+<meta property="og:site_name" content="Adu's blog">
+<meta property="og:description" content="Systemd 是 Linux 系统工具，用来启动守护进程，已成为大多数发行版的标准配置。">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016030703.png">
+<meta property="og:updated_time" content="2016-06-05T08:25:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Systemd">
+<meta name="twitter:description" content="Systemd 是 Linux 系统工具，用来启动守护进程，已成为大多数发行版的标准配置。">
+<meta name="twitter:image" content="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016030703.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265234160936289000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Systemd | Adu's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b72da5a0d7b5ced639a01a28390e0e64";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Adu's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">life is beautiful</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Systemd
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-05T15:55:33+08:00" content="2016-06-05">
+              2016-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/05/Systemd/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/05/Systemd/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Systemd 是 Linux 系统工具，用来启动守护进程，已成为大多数发行版的标准配置。<br><a id="more"></a></p>
+<h1 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h1><p>历史上，Linux 的启动一直采用<code>init</code>进程。<br>下面的命令用来启动服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo /etc/init.d/apache2 start</span><br><span class="line"># 或者</span><br><span class="line">$ service apache2 start</span><br></pre></td></tr></table></figure>
+<p>这种方法有两个缺点。<br>一是启动时间长。init进程是串行启动，只有前一个进程启动完，才会启动下一个进程。<br>二是启动脚本复杂。init进程只是执行启动脚本，不管其他事情。脚本需要自己处理各种情况，这往往使得脚本变得很长。</p>
+<h1 id="Systemd概述"><a href="#Systemd概述" class="headerlink" title="Systemd概述"></a>Systemd概述</h1><p>Systemd 就是为了解决这些问题而诞生的。它的设计目标是，为系统的启动和管理提供一套完整的解决方案。<br>根据 Linux 惯例，字母d是守护进程（daemon）的缩写。 Systemd 这个名字的含义，就是它要守护整个系统。<br>使用了 Systemd，就不需要再用init了。Systemd 取代了initd，成为系统的第一个进程（PID 等于 1），其他进程都是它的子进程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl --version</span><br></pre></td></tr></table></figure>
+<p>上面的命令查看 Systemd 的版本。<br>Systemd 的优点是功能强大，使用方便，缺点是体系庞大，非常复杂。事实上，现在还有很多人反对使用 Systemd，理由就是它过于复杂，与操作系统的其他部分强耦合，违反”keep simple, keep stupid”的Unix 哲学。<br><img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016030703.png" alt=""><br>（上图为 Systemd 架构图）</p>
+<h1 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h1><p>Systemd 并不是一个命令，而是一组命令，涉及到系统管理的方方面面。</p>
+<h2 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h2><p>systemctl是 Systemd 的主命令，用于管理系统。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 重启系统</span><br><span class="line">$ sudo systemctl reboot</span><br><span class="line"></span><br><span class="line"># 关闭系统，切断电源</span><br><span class="line">$ sudo systemctl poweroff</span><br><span class="line"></span><br><span class="line"># CPU停止工作</span><br><span class="line">$ sudo systemctl halt</span><br><span class="line"></span><br><span class="line"># 暂停系统</span><br><span class="line">$ sudo systemctl suspend</span><br><span class="line"></span><br><span class="line"># 让系统进入冬眠状态</span><br><span class="line">$ sudo systemctl hibernate</span><br><span class="line"></span><br><span class="line"># 让系统进入交互式休眠状态</span><br><span class="line">$ sudo systemctl hybrid-sleep</span><br><span class="line"></span><br><span class="line"># 启动进入救援状态（单用户状态）</span><br><span class="line">$ sudo systemctl rescue</span><br></pre></td></tr></table></figure>
+<h2 id="systemd-analyze"><a href="#systemd-analyze" class="headerlink" title="systemd-analyze"></a>systemd-analyze</h2><p>systemd-analyze命令用于查看启动耗时。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 查看启动耗时</span><br><span class="line">$ systemd-analyze                                                                                       </span><br><span class="line"></span><br><span class="line"># 查看每个服务的启动耗时</span><br><span class="line">$ systemd-analyze blame</span><br><span class="line"></span><br><span class="line"># 显示瀑布状的启动过程流</span><br><span class="line">$ systemd-analyze critical-chain</span><br><span class="line"></span><br><span class="line"># 显示指定服务的启动流</span><br><span class="line">$ systemd-analyze critical-chain atd.service</span><br></pre></td></tr></table></figure>
+<h2 id="hostnamectl"><a href="#hostnamectl" class="headerlink" title="hostnamectl"></a>hostnamectl</h2><p>hostnamectl命令用于查看当前主机的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 显示当前主机的信息</span><br><span class="line">$ hostnamectl</span><br><span class="line"></span><br><span class="line"># 设置主机名。</span><br><span class="line">$ sudo hostnamectl set-hostname rhel7</span><br></pre></td></tr></table></figure>
+<h2 id="localectl"><a href="#localectl" class="headerlink" title="localectl"></a>localectl</h2><p>localectl命令用于查看本地化设置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 查看本地化设置</span><br><span class="line">$ localectl</span><br><span class="line"></span><br><span class="line"># 设置本地化参数。</span><br><span class="line">$ sudo localectl set-locale LANG=en_GB.utf8</span><br><span class="line">$ sudo localectl set-keymap en_GB</span><br></pre></td></tr></table></figure>
+<h2 id="timedatectl"><a href="#timedatectl" class="headerlink" title="timedatectl"></a>timedatectl</h2><p>timedatectl命令用于查看当前时区设置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前时区设置</span><br><span class="line">$ timedatectl</span><br><span class="line"></span><br><span class="line"># 显示所有可用的时区</span><br><span class="line">$ timedatectl list-timezones                                                                                   </span><br><span class="line"></span><br><span class="line"># 设置当前时区</span><br><span class="line">$ sudo timedatectl set-timezone America/New_York</span><br><span class="line">$ sudo timedatectl set-time YYYY-MM-DD</span><br><span class="line">$ sudo timedatectl set-time HH:MM:SS</span><br></pre></td></tr></table></figure>
+<h2 id="loginctl"><a href="#loginctl" class="headerlink" title="loginctl"></a>loginctl</h2><p>loginctl命令用于查看当前登录的用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前session</span><br><span class="line">$ loginctl list-sessions</span><br><span class="line"></span><br><span class="line"># 列出当前登录用户</span><br><span class="line">$ loginctl list-users</span><br><span class="line"></span><br><span class="line"># 列出显示指定用户的信息</span><br><span class="line">$ loginctl show-user ruanyf</span><br></pre></td></tr></table></figure>
+<h1 id="Until"><a href="#Until" class="headerlink" title="Until"></a>Until</h1><h2 id="含义"><a href="#含义" class="headerlink" title="含义"></a>含义</h2><p>Systemd 可以管理所有系统资源。不同的资源统称为 Unit（单位）。<br>Unit 一共分成12种。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Service unit：系统服务</span><br><span class="line">Target unit：多个 Unit 构成的一个组</span><br><span class="line">Device Unit：硬件设备</span><br><span class="line">Mount Unit：文件系统的挂载点</span><br><span class="line">Automount Unit：自动挂载点</span><br><span class="line">Path Unit：文件或路径</span><br><span class="line">Scope Unit：不是由 Systemd 启动的外部进程</span><br><span class="line">Slice Unit：进程组</span><br><span class="line">Snapshot Unit：Systemd 快照，可以切回某个快照</span><br><span class="line">Socket Unit：进程间通信的 socket</span><br><span class="line">Swap Unit：swap 文件</span><br><span class="line">Timer Unit：定时器</span><br></pre></td></tr></table></figure>
+<p><code>systemctl list-units</code>命令可以查看当前系统的所有 Unit 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 列出正在运行的 Unit</span><br><span class="line">$ systemctl list-units</span><br><span class="line"></span><br><span class="line"># 列出所有Unit，包括没有找到配置文件的或者启动失败的</span><br><span class="line">$ systemctl list-units --all</span><br><span class="line"></span><br><span class="line"># 列出所有没有运行的 Unit</span><br><span class="line">$ systemctl list-units --all --state=inactive</span><br><span class="line"></span><br><span class="line"># 列出所有加载失败的 Unit</span><br><span class="line">$ systemctl list-units --failed</span><br><span class="line"></span><br><span class="line"># 列出所有正在运行的、类型为 service 的 Unit</span><br><span class="line">$ systemctl list-units --type=service</span><br></pre></td></tr></table></figure>
+<h2 id="Unit的状态"><a href="#Unit的状态" class="headerlink" title="Unit的状态"></a>Unit的状态</h2><p><code>systemctl status</code>命令用于查看系统状态和单个 Unit 的状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 显示系统状态</span><br><span class="line">$ systemctl status</span><br><span class="line"></span><br><span class="line"># 显示单个 Unit 的状态</span><br><span class="line">$ sysystemctl status bluetooth.service</span><br><span class="line"></span><br><span class="line"># 显示远程主机的某个 Unit 的状态</span><br><span class="line">$ systemctl -H root@rhel7.example.com status httpd.service</span><br></pre></td></tr></table></figure>
+<p>除了<code>status</code>命令，<code>systemctl</code>还提供了三个查询状态的简单方法，主要供脚本内部的判断语句使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 显示某个 Unit 是否正在运行</span><br><span class="line">$ systemctl is-active application.service</span><br><span class="line"></span><br><span class="line"># 显示某个 Unit 是否处于启动失败状态</span><br><span class="line">$ systemctl is-failed application.service</span><br><span class="line"></span><br><span class="line"># 显示某个 Unit 服务是否建立了启动链接</span><br><span class="line">$ systemctl is-enabled application.service</span><br></pre></td></tr></table></figure>
+<h2 id="Unit管理"><a href="#Unit管理" class="headerlink" title="Unit管理"></a>Unit管理</h2><p>对于用户来说，最常用的是下面这些命令，用于启动和停止 Unit（主要是 service）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 立即启动一个服务</span><br><span class="line">$ sudo systemctl start apache.service</span><br><span class="line"></span><br><span class="line"># 立即停止一个服务</span><br><span class="line">$ sudo systemctl stop apache.service</span><br><span class="line"></span><br><span class="line"># 重启一个服务</span><br><span class="line">$ sudo systemctl restart apache.service</span><br><span class="line"></span><br><span class="line"># 杀死一个服务的所有子进程</span><br><span class="line">$ sudo systemctl kill apache.service</span><br><span class="line"></span><br><span class="line"># 重新加载一个服务的配置文件</span><br><span class="line">$ sudo systemctl reload apache.service</span><br><span class="line"></span><br><span class="line"># 重载所有修改过的配置文件</span><br><span class="line">$ sudo systemctl daemon-reload</span><br><span class="line"></span><br><span class="line"># 显示某个 Unit 的所有底层参数</span><br><span class="line">$ systemctl show httpd.service</span><br><span class="line"></span><br><span class="line"># 显示某个 Unit 的指定属性的值</span><br><span class="line">$ systemctl show -p CPUShares httpd.service</span><br><span class="line"></span><br><span class="line"># 设置某个 Unit 的指定属性</span><br><span class="line">$ sudo systemctl set-property httpd.service CPUShares=500</span><br></pre></td></tr></table></figure>
+<h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2><p>Unit 之间存在依赖关系：A 依赖于 B，就意味着 Systemd 在启动 A 的时候，同时会去启动 B。<br><code>systemctl list-dependencies</code>命令列出一个 Unit 的所有依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl list-dependencies nginx.service</span><br></pre></td></tr></table></figure>
+<p>上面命令的输出结果之中，有些依赖是 Target 类型（详见下文），默认不会展开显示。如果要展开 Target，就需要使用<code>--all</code>参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl list-dependencies --all nginx.service</span><br></pre></td></tr></table></figure>
+<h1 id="Unit配置文件"><a href="#Unit配置文件" class="headerlink" title="Unit配置文件"></a>Unit配置文件</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>每一个 Unit 都有一个配置文件，告诉 Systemd 怎么启动这个 Unit 。<br>Systemd 默认从目录/etc/systemd/system/读取配置文件。但是，里面存放的大部分文件都是符号链接，指向目录/usr/lib/systemd/system/，真正的配置文件存放在那个目录。<br><code>systemctl enable</code>命令用于在上面两个目录之间，建立符号链接关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable clamd@scan.service</span><br><span class="line"># 等同于</span><br><span class="line">$ sudo ln -s &apos;/usr/lib/systemd/system/clamd@scan.service&apos; &apos;/etc/systemd/system/m</span><br></pre></td></tr></table></figure>
+<p>如果配置文件里面设置了开机启动，<code>systemctl enable</code>命令相当于激活开机启动。<br>与之对应的，<code>systemctl disable</code>命令用于在两个目录之间，撤销符号链接关系，相当于撤销开机启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl disable clamd@scan.service</span><br></pre></td></tr></table></figure>
+<p>配置文件的后缀名，就是该 Unit 的种类，比如sshd.socket。如果省略，Systemd 默认后缀名为.service，所以sshd会被理解成sshd.service。</p>
+<h2 id="配置文件的状态"><a href="#配置文件的状态" class="headerlink" title="配置文件的状态"></a>配置文件的状态</h2><p><code>systemctl list-unit-files</code>命令用于列出所有配置文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 列出所有配置文件</span><br><span class="line">$ systemctl list-unit-files</span><br><span class="line"></span><br><span class="line"># 列出指定类型的配置文件</span><br><span class="line">$ systemctl list-unit-files --type=service</span><br></pre></td></tr></table></figure>
+<p>这个命令会输出一个列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl list-unit-files</span><br><span class="line"></span><br><span class="line">UNIT FILE              STATE</span><br><span class="line">chronyd.service        enabled</span><br><span class="line">clamd@.service         static</span><br><span class="line">clamd@scan.service     disabled</span><br></pre></td></tr></table></figure>
+<p>这个列表显示每个配置文件的状态，一共有四种。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enabled：已建立启动链接</span><br><span class="line">disabled：没建立启动链接</span><br><span class="line">static：该配置文件没有[Install]部分（无法执行），只能作为其他配置文件的依赖</span><br><span class="line">masked：该配置文件被禁止建立启动链接</span><br></pre></td></tr></table></figure>
+<p>注意，从配置文件的状态无法看出，该 Unit 是否正在运行。这必须执行前面提到的<code>systemctl status</code>命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl status bluetooth.service</span><br></pre></td></tr></table></figure>
+<p>一旦修改配置文件，就要让 SystemD 重新加载配置文件，然后重新启动，否则修改不会生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl daemon-reload</span><br><span class="line">$ sudo systemctl restart httpd.service</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件的格式"><a href="#配置文件的格式" class="headerlink" title="配置文件的格式"></a>配置文件的格式</h2><p>配置文件就是普通的文本文件，可以用文本编辑器打开。<br><code>systemctl cat</code>命令可以查看配置文件的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl cat atd.service</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description=ATD daemon</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/bin/atd</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>从上面的输出可以看到，配置文件分成几个区块。每个区块的第一行，是用方括号表示的区别名，比如[Unit]。注意，配置文件的区块名和字段名，都是大小写敏感的。<br>每个区块内部是一些等号连接的键值对。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Section]</span><br><span class="line">Directive1=value</span><br><span class="line">Directive2=value</span><br><span class="line"></span><br><span class="line">. . .</span><br></pre></td></tr></table></figure>
+<p>注意，键值对的等号两侧不能有空格。</p>
+<h2 id="配置文件的区块"><a href="#配置文件的区块" class="headerlink" title="配置文件的区块"></a>配置文件的区块</h2><p>[Unit]区块通常是配置文件的第一个区块，用来定义 Unit 的元数据，以及配置与其他 Unit 的关系。它的主要字段如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Description：简短描述</span><br><span class="line">Documentation：文档地址</span><br><span class="line">Requires：当前 Unit 依赖的其他 Unit，如果它们没有运行，当前 Unit 会启动失败</span><br><span class="line">Wants：与当前 Unit 配合的其他 Unit，如果它们没有运行，当前 Unit 不会启动失败</span><br><span class="line">BindsTo：与Requires类似，它指定的 Unit 如果退出，会导致当前 Unit 停止运行</span><br><span class="line">Before：如果该字段指定的 Unit 也要启动，那么必须在当前 Unit 之后启动</span><br><span class="line">After：如果该字段指定的 Unit 也要启动，那么必须在当前 Unit 之前启动</span><br><span class="line">Conflicts：这里指定的 Unit 不能与当前 Unit 同时运行</span><br><span class="line">Condition...：当前 Unit 运行必须满足的条件，否则不会运行</span><br><span class="line">Assert...：当前 Unit 运行必须满足的条件，否则会报启动失败</span><br></pre></td></tr></table></figure>
+<p>[Install]通常是配置文件的最后一个区块，用来定义如何启动，以及是否开机启动。它的主要字段如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WantedBy：它的值是一个或多个 Target，当前 Unit 激活时（enable）符号链接会放入/etc/systemd/system目录下面以 Target 名 + .wants后缀构成的子目录中</span><br><span class="line">RequiredBy：它的值是一个或多个 Target，当前 Unit 激活时，符号链接会放入/etc/systemd/system目录下面以 Target 名 + .required后缀构成的子目录中</span><br><span class="line">Alias：当前 Unit 可用于启动的别名</span><br><span class="line">Also：当前 Unit 激活（enable）时，会被同时激活的其他 Unit</span><br></pre></td></tr></table></figure>
+<p>[Service]区块用来 Service 的配置，只有 Service 类型的 Unit 才有这个区块。它的主要字段如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Type：定义启动时的进程行为。它有以下几种值。</span><br><span class="line">Type=simple：默认值，执行ExecStart指定的命令，启动主进程</span><br><span class="line">Type=forking：以 fork 方式从父进程创建子进程，创建后父进程会立即退出</span><br><span class="line">Type=oneshot：一次性进程，Systemd 会等当前服务退出，再继续往下执行</span><br><span class="line">Type=dbus：当前服务通过D-Bus启动</span><br><span class="line">Type=notify：当前服务启动完毕，会通知Systemd，再继续往下执行</span><br><span class="line">Type=idle：若有其他任务执行完毕，当前服务才会运行</span><br><span class="line">ExecStart：启动当前服务的命令</span><br><span class="line">ExecStartPre：启动当前服务之前执行的命令</span><br><span class="line">ExecStartPost：启动当前服务之后执行的命令</span><br><span class="line">ExecReload：重启当前服务时执行的命令</span><br><span class="line">ExecStop：停止当前服务时执行的命令</span><br><span class="line">ExecStopPost：停止当其服务之后执行的命令</span><br><span class="line">RestartSec：自动重启当前服务间隔的秒数</span><br><span class="line">Restart：定义何种情况 Systemd 会自动重启当前服务，可能的值包括always（总是重启）、on-success、on-failure、on-abnormal、on-abort、on-watchdog</span><br><span class="line">TimeoutSec：定义 Systemd 停止当前服务之前等待的秒数</span><br><span class="line">Environment：指定环境变量</span><br></pre></td></tr></table></figure>
+<p>Unit 配置文件的完整字段清单，请参考<a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html" target="_blank" rel="external">官方文档</a>。</p>
+<h1 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h1><p>启动计算机的时候，需要启动大量的 Unit。如果每一次启动，都要一一写明本次启动需要哪些 Unit，显然非常不方便。Systemd 的解决方案就是 Target。<br>简单说，Target 就是一个 Unit 组，包含许多相关的 Unit 。启动某个 Target 的时候，Systemd 就会启动里面所有的 Unit。从这个意义上说，Target 这个概念类似于”状态点”，启动某个 Target 就好比启动到某种状态。<br>传统的init启动模式里面，有 RunLevel 的概念，跟 Target 的作用很类似。不同的是，RunLevel 是互斥的，不可能多个 RunLevel 同时启动，但是多个 Target 可以同时启动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前系统的所有 Target</span><br><span class="line">$ systemctl list-unit-files --type=target</span><br><span class="line"></span><br><span class="line"># 查看一个 Target 包含的所有 Unit</span><br><span class="line">$ systemctl list-dependencies multi-user.target</span><br><span class="line"></span><br><span class="line"># 查看启动时的默认 Target</span><br><span class="line">$ systemctl get-default</span><br><span class="line"></span><br><span class="line"># 设置启动时的默认 Target</span><br><span class="line">$ sudo systemctl set-default multi-user.target</span><br><span class="line"></span><br><span class="line"># 切换 Target 时，默认不关闭前一个 Target 启动的进程，</span><br><span class="line"># systemctl isolate 命令改变这种行为，</span><br><span class="line"># 关闭前一个 Target 里面所有不属于后一个 Target 的进程</span><br><span class="line">$ sudo systemctl isolate multi-user.target</span><br></pre></td></tr></table></figure>
+<p>Target 与 传统 RunLevel 的对应关系如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Traditional runlevel      New target name     Symbolically linked to...</span><br><span class="line"></span><br><span class="line">Runlevel 0           |    runlevel0.target -&gt; poweroff.target</span><br><span class="line">Runlevel 1           |    runlevel1.target -&gt; rescue.target</span><br><span class="line">Runlevel 2           |    runlevel2.target -&gt; multi-user.target</span><br><span class="line">Runlevel 3           |    runlevel3.target -&gt; multi-user.target</span><br><span class="line">Runlevel 4           |    runlevel4.target -&gt; multi-user.target</span><br><span class="line">Runlevel 5           |    runlevel5.target -&gt; graphical.target</span><br><span class="line">Runlevel 6           |    runlevel6.target -&gt; reboot.target</span><br></pre></td></tr></table></figure>
+<p>它与init进程的主要差别如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）默认的 RunLevel（在/etc/inittab文件设置）现在被默认的 Target 取代，位置是/etc/systemd/system/default.target，通常符号链接到graphical.target（图形界面）或者multi-user.target（多用户命令行）。</span><br><span class="line">（2）启动脚本的位置，以前是/etc/init.d目录，符号链接到不同的 RunLevel 目录 （比如/etc/rc3.d、/etc/rc5.d等），现在则存放在/lib/systemd/system和/etc/systemd/system目录。</span><br><span class="line">（3）配置文件的位置，以前init进程的配置文件是/etc/inittab，各种服务的配置文件存放在/etc/sysconfig目录。现在的配置文件主要存放在/lib/systemd目录，在/etc/systemd目录里面的修改可以覆盖原始设置。</span><br></pre></td></tr></table></figure>
+<h1 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h1><p>Systemd 统一管理所有 Unit 的启动日志。带来的好处就是，可以只用journalctl一个命令，查看所有日志（内核日志和应用日志）。日志的配置文件是/etc/systemd/journald.conf。<br>journalctl功能强大，用法非常多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"># 查看所有日志（默认情况下 ，只保存本次启动的日志）</span><br><span class="line">$ sudo journalctl</span><br><span class="line"></span><br><span class="line"># 查看内核日志（不显示应用日志）</span><br><span class="line">$ sudo journalctl -k</span><br><span class="line"></span><br><span class="line"># 查看系统本次启动的日志</span><br><span class="line">$ sudo journalctl -b</span><br><span class="line">$ sudo journalctl -b -0</span><br><span class="line"></span><br><span class="line"># 查看上一次启动的日志（需更改设置）</span><br><span class="line">$ sudo journalctl -b -1</span><br><span class="line"></span><br><span class="line"># 查看指定时间的日志</span><br><span class="line">$ sudo journalctl --since=&quot;2012-10-30 18:17:16&quot;</span><br><span class="line">$ sudo journalctl --since &quot;20 min ago&quot;</span><br><span class="line">$ sudo journalctl --since yesterday</span><br><span class="line">$ sudo journalctl --since &quot;2015-01-10&quot; --until &quot;2015-01-11 03:00&quot;</span><br><span class="line">$ sudo journalctl --since 09:00 --until &quot;1 hour ago&quot;</span><br><span class="line"></span><br><span class="line"># 显示尾部的最新10行日志</span><br><span class="line">$ sudo journalctl -n</span><br><span class="line"></span><br><span class="line"># 显示尾部指定行数的日志</span><br><span class="line">$ sudo journalctl -n 20</span><br><span class="line"></span><br><span class="line"># 实时滚动显示最新日志</span><br><span class="line">$ sudo journalctl -f</span><br><span class="line"></span><br><span class="line"># 查看指定服务的日志</span><br><span class="line">$ sudo journalctl /usr/lib/systemd/systemd</span><br><span class="line"></span><br><span class="line"># 查看指定进程的日志</span><br><span class="line">$ sudo journalctl _PID=1</span><br><span class="line"></span><br><span class="line"># 查看某个路径的脚本的日志</span><br><span class="line">$ sudo journalctl /usr/bin/bash</span><br><span class="line"></span><br><span class="line"># 查看指定用户的日志</span><br><span class="line">$ sudo journalctl _UID=33 --since today</span><br><span class="line"></span><br><span class="line"># 查看某个 Unit 的日志</span><br><span class="line">$ sudo journalctl -u nginx.service</span><br><span class="line">$ sudo journalctl -u nginx.service --since today</span><br><span class="line"></span><br><span class="line"># 实时滚动显示某个 Unit 的最新日志</span><br><span class="line">$ sudo journalctl -u nginx.service -f</span><br><span class="line"></span><br><span class="line"># 合并显示多个 Unit 的日志</span><br><span class="line">$ journalctl -u nginx.service -u php-fpm.service --since today</span><br><span class="line"></span><br><span class="line"># 查看指定优先级（及其以上级别）的日志，共有8级</span><br><span class="line"># 0: emerg</span><br><span class="line"># 1: alert</span><br><span class="line"># 2: crit</span><br><span class="line"># 3: err</span><br><span class="line"># 4: warning</span><br><span class="line"># 5: notice</span><br><span class="line"># 6: info</span><br><span class="line"># 7: debug</span><br><span class="line">$ sudo journalctl -p err -b</span><br><span class="line"></span><br><span class="line"># 日志默认分页输出，--no-pager 改为正常的标准输出</span><br><span class="line">$ sudo journalctl --no-pager</span><br><span class="line"></span><br><span class="line"># 以 JSON 格式（单行）输出</span><br><span class="line">$ sudo journalctl -b -u nginx.service -o json</span><br><span class="line"></span><br><span class="line"># 以 JSON 格式（多行）输出，可读性更好</span><br><span class="line">$ sudo journalctl -b -u nginx.serviceqq</span><br><span class="line"> -o json-pretty</span><br><span class="line"></span><br><span class="line"># 显示日志占据的硬盘空间</span><br><span class="line">$ sudo journalctl --disk-usage</span><br><span class="line"></span><br><span class="line"># 指定日志文件占据的最大空间</span><br><span class="line">$ sudo journalctl --vacuum-size=1G</span><br><span class="line"></span><br><span class="line"># 指定日志文件保存多久</span><br><span class="line">$ sudo journalctl --vacuum-time=1years</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Systemd/" rel="tag">#Systemd</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/29/程序员入门之git/" rel="next" title="程序员入门之git">
+                <i class="fa fa-chevron-left"></i> 程序员入门之git
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/15/ansible学习小记/" rel="prev" title="ansible学习小记">
+                ansible学习小记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/06/05/Systemd/"
+     data-title="Systemd"
+     data-content=""
+     data-url="http://adu.404nf.cn/2016/06/05/Systemd/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/06/05/Systemd/"
+           data-title="Systemd" data-url="http://adu.404nf.cn/2016/06/05/Systemd/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="images/default_avatar.jpg"
+               alt="Luke Du" />
+          <p class="site-author-name" itemprop="name">Luke Du</p>
+          <p class="site-description motion-element" itemprop="description">life is beautiful</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ADU-21" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/6069208/luke-du" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> stackoverflow
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/duuyidong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/zh-cn/" target="_blank">Hexo</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#由来"><span class="nav-number">1.</span> <span class="nav-text">由来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Systemd概述"><span class="nav-number">2.</span> <span class="nav-text">Systemd概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统管理"><span class="nav-number">3.</span> <span class="nav-text">系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl"><span class="nav-number">3.1.</span> <span class="nav-text">systemctl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemd-analyze"><span class="nav-number">3.2.</span> <span class="nav-text">systemd-analyze</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hostnamectl"><span class="nav-number">3.3.</span> <span class="nav-text">hostnamectl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#localectl"><span class="nav-number">3.4.</span> <span class="nav-text">localectl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#timedatectl"><span class="nav-number">3.5.</span> <span class="nav-text">timedatectl</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#loginctl"><span class="nav-number">3.6.</span> <span class="nav-text">loginctl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Until"><span class="nav-number">4.</span> <span class="nav-text">Until</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#含义"><span class="nav-number">4.1.</span> <span class="nav-text">含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit的状态"><span class="nav-number">4.2.</span> <span class="nav-text">Unit的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unit管理"><span class="nav-number">4.3.</span> <span class="nav-text">Unit管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-number">4.4.</span> <span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unit配置文件"><span class="nav-number">5.</span> <span class="nav-text">Unit配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件的状态"><span class="nav-number">5.2.</span> <span class="nav-text">配置文件的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件的格式"><span class="nav-number">5.3.</span> <span class="nav-text">配置文件的格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件的区块"><span class="nav-number">5.4.</span> <span class="nav-text">配置文件的区块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Target"><span class="nav-number">6.</span> <span class="nav-text">Target</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日志管理"><span class="nav-number">7.</span> <span class="nav-text">日志管理</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luke Du</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"duuyidong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

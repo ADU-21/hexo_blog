@@ -1,0 +1,861 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="敏捷,ThoughtWorks," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Adu's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="关于一周来学习情况总结不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThoughtWorks第一周学习总结">
+<meta property="og:url" content="http://adu.404nf.cn/2016/05/24/ThoughtWorks第一周学习总结/index.html">
+<meta property="og:site_name" content="Adu's blog">
+<meta property="og:description" content="关于一周来学习情况总结不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。">
+<meta property="og:updated_time" content="2016-05-24T16:22:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThoughtWorks第一周学习总结">
+<meta name="twitter:description" content="关于一周来学习情况总结不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6265234160936289000,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ThoughtWorks第一周学习总结 | Adu's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?b72da5a0d7b5ced639a01a28390e0e64";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Adu's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">life is beautiful</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ThoughtWorks第一周学习总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-24T21:44:57+08:00" content="2016-05-24">
+              2016-05-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ThoughtWorker/" itemprop="url" rel="index">
+                    <span itemprop="name">ThoughtWorker</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/24/ThoughtWorks第一周学习总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/24/ThoughtWorks第一周学习总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="关于一周来学习情况总结"><a href="#关于一周来学习情况总结" class="headerlink" title="关于一周来学习情况总结"></a>关于一周来学习情况总结</h1><p>不知不觉进入TW已经一周了，深感自己离成为一个合格的TWer还有很长的距离。在学习的过程中离不开总结和分享，在TW最棒的就是可以随时和身边的技术牛人们分享自己的学习心得，时时总结，有助于梳理自己的知识体系，巩固自己的学习方法。正所谓“时时勤拂拭，莫使惹尘埃”。<br><a id="more"></a></p>
+<p>下面就几个关键词进行一个小结：</p>
+<h2 id="我所除的环境"><a href="#我所除的环境" class="headerlink" title="我所除的环境"></a>我所除的环境</h2><h3 id="ThouhgtWorks显而易见的工作习惯"><a href="#ThouhgtWorks显而易见的工作习惯" class="headerlink" title="ThouhgtWorks显而易见的工作习惯"></a>ThouhgtWorks显而易见的工作习惯</h3><p>  1.Email 轰炸<br>  2.Stand metting<br>      就像Align Development里面提到的一样，Stand up, Aline Comstomer 在TW被很好地执行，每日站会是必不可少的<br>  3.频繁的沟通<br>      之前的工作经验告诉我，你只需要写得一手好代码就可以在公司站稳脚跟，但是这点认知在TW被彻底推翻，与代码同样重要的是你的沟通能力，在实际开发过程中，沟通消耗的资源甚至会大于写代码的消耗。<br>  4.Pair-Programming<br>      这也是Align Deployment的重要一环，在TW几乎每一件事都是pair的，这中工作方式可以有效地解决掉“个人英雄”的问题，一段代码出了问题，至少有两个人可以来改这段代码。同时加强了程序员之间的交流，也有利于代码规范的实施。<br>  5.代码洁癖<br>      由于每一段代码都会有人review,这使很多TWer养成了代码洁癖，代码不但要实现功能，还要写得好看，这一点我个人认为也是极好的。<br>  6.频繁的workshop和session<br>  7.无处不在的敏捷<br>    在TW，敏捷已经超越一种开发方式而成为一种文化存在，步步为营，小步前进，似乎是每一个工程师低调而又自信的工作方式。这很好，值得学习：）</p>
+<h2 id="我面临的问题"><a href="#我面临的问题" class="headerlink" title="我面临的问题"></a>我面临的问题</h2><p>工作方式上的问题是很容易适应的，TW有宽松的工作环境和乐于助人的同事。让我吃惊的是我接触到的每一个同事都是健谈而友好的，其中不乏很多大神，所以我一点都不担心自己成长。目前只需要找到自己的短板，针对性的进行一些加强性训练：</p>
+<pre><code>1.英文能力
+    从进公司到现在，已经从几乎听不懂同事们在说什么到可以看英文文档了，但是英文交流还存在严重的问题，主要表现在无法用英语表达自己所想的内容，另外英文阅读和听力速度还有些跟不上
+2.DevOps专业能力
+    目前我接触到的DevOps能力主要落实到几个工具的使用上：Jenkins,AWS,ansible,另外还需要掌握vagrant,git,shell,yaml，Linux命令（Vi编辑器命令）对工具来讲，整体不难，拿下英文文档，实际需要的只是操作，后面几个更倾向于需要具备的基本素质才是我目前最需要达到的目标。
+3.习惯的建立
+    习惯主要分为工作习惯，学习习惯，和生活习惯，这几点在过去的一周几乎是混乱的，这几个习惯应该有一定的准则，概括来说，工作习惯应该是高效可靠，随时可以再session和当前的work中切换自己的状态，那么设计到的内容主要是calendar的管理和mind.txt的优化，我还没有上手公司正式项目，所以目前工作效率优化仅仅停留在自己的事情备忘和计划这个层面。生活习惯，目前来讲主要是健身和游泳，羽毛球视club活动参加，生活应该规律，保证健康的身体和工作时间有一个清醒的大脑。学习习惯是所有习惯中最重要的，主要是根据学习时间，blog时间和阅读时间是每天不可少的内容，希望这些习惯可以再TW贯彻下去.
+</code></pre><h2 id="我的应对"><a href="#我的应对" class="headerlink" title="我的应对"></a>我的应对</h2><pre><code>1.关于英语问题，目前的解决方式是阅读MartinFlower的博客，以及每天用英语进行工作总结，尽可能熟悉英文语境以求更好表达自己想表达的东西。
+2.DevOps专业能力
+    workshop基本只适用于还没有建立起自己学习习惯的人和对一个东西建立初步认识，session也不能对技术提高起到决定性的帮助，频繁的沟通带来的缺点是时间的碎片化，我需要随时跟进自己的一个进程进展到什么程度，有效挂起和有效恢复，才能保证工作和学习同步有效地进行。
+    具体来说专业能力的提高除了被动在工作中使用需要用到的技术，跟以前一样，还是要在工作之余对在工作中遇到的问题进行挖掘，弄清楚背后的原理，才能应对同样的问题以及问题的变种。
+3.习惯的建立
+    工作上和生活上不用花太大心思，生活上只要保证每天早晚各半个小时的锻炼整个人的精气神就会大不一样。周末游泳，这个不用我说自然会有的。    
+</code></pre><h2 id="我的决定"><a href="#我的决定" class="headerlink" title="我的决定"></a>我的决定</h2><p>基于以上现状以及分析，我的个人时间计划表初步安排如下：</p>
+<pre><code>7：00 起床
+~7：30洗漱，锻炼
+~8：00阅读英语，内容为随机选取技术博客活着计划任务一篇
+9：00~12：00工作
+12：00~13：00阅读一小时
+13：00~13：30可以适当午休
+14：00~19:00工作，汇报一天的工作
+20：00成功降落
+晚上：整理白天产生的mind.txt，选取一个技术点blog
+    英文能力训练二十分钟，阅读一小时，锻炼半小时
+23:00睡觉    
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/敏捷/" rel="tag">#敏捷</a>
+          
+            <a href="/tags/ThoughtWorks/" rel="tag">#ThoughtWorks</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/19/CI-CD/" rel="next" title="CI/CD">
+                <i class="fa fa-chevron-left"></i> CI/CD
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/29/程序员入门之git/" rel="prev" title="程序员入门之git">
+                程序员入门之git <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/05/24/ThoughtWorks第一周学习总结/"
+     data-title="ThoughtWorks第一周学习总结"
+     data-content=""
+     data-url="http://adu.404nf.cn/2016/05/24/ThoughtWorks第一周学习总结/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/24/ThoughtWorks第一周学习总结/"
+           data-title="ThoughtWorks第一周学习总结" data-url="http://adu.404nf.cn/2016/05/24/ThoughtWorks第一周学习总结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="images/default_avatar.jpg"
+               alt="Luke Du" />
+          <p class="site-author-name" itemprop="name">Luke Du</p>
+          <p class="site-description motion-element" itemprop="description">life is beautiful</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ADU-21" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://stackoverflow.com/users/6069208/luke-du" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> stackoverflow
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/duuyidong" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> twitter
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        <div class="links-of-blogroll motion-element">
+          
+            <div class="links-of-blogroll-title">Links</div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://theme-next.iissnan.com/" target="_blank">NexT</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://hexo.io/zh-cn/" target="_blank">Hexo</a>
+                </li>
+              
+            </ul>
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于一周来学习情况总结"><span class="nav-number">1.</span> <span class="nav-text">关于一周来学习情况总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我所除的环境"><span class="nav-number">1.1.</span> <span class="nav-text">我所除的环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThouhgtWorks显而易见的工作习惯"><span class="nav-number">1.1.1.</span> <span class="nav-text">ThouhgtWorks显而易见的工作习惯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我面临的问题"><span class="nav-number">1.2.</span> <span class="nav-text">我面临的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的应对"><span class="nav-number">1.3.</span> <span class="nav-text">我的应对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我的决定"><span class="nav-number">1.4.</span> <span class="nav-text">我的决定</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Luke Du</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"duuyidong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
